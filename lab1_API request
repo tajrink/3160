@@ -1,0 +1,26 @@
+API.js:
+
+const http = require('http');
+
+// creating an http server
+const server = http.createServer();
+
+// attaching a request handler to send 'Hello, world!'
+server.on('request', function(request, response) {
+  response.end('Hello, world!');
+});
+
+// listening on port 5000
+server.listen(5000);
+
+// creating a request
+http.get('http://localhost:5000', function(response) {
+  // logging the chunks of data received
+  // from the response object
+  response.on('data', function(chunk) {
+    console.log(chunk.toString());
+  });
+
+  // closing the server
+  server.close();
+});
