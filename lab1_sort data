@@ -1,0 +1,101 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+// Defines class Artist
+class Artist
+{
+   // Instance variables to store artist information
+   String artistName;
+   int stream;
+  
+   // Parameterized constructor to assign parameter values to instance variables
+   public Artist(String na, int st)
+   {
+       artistName = na;
+       stream = st;
+   }
+  
+   // Method to return stream
+   public int getStrem()
+   {
+       return stream;
+   }
+  
+   // Overrides method to return artist information
+   public String toString()
+   {
+       return "\n Artist Name: " + artistName + "\t Stream: " + stream;
+   }
+}// End of class Artist
+
+// Driver class definition
+public class ArtistCSV
+{
+   // Method to red file contents and store it in array list artist
+   static void readFile(ArrayList<Artist> artist)
+   {
+       Scanner sc = null;
+      
+       // Try block
+       try
+       {
+           // Scanner class object created for file
+           sc = new Scanner(new File("artist.dat"));
+          
+           // Loops till data available
+           while(sc.hasNext())
+           {
+               // Reads a record
+               String data = sc.nextLine();
+               // Split the record with comma
+               String []record = data.split(",");
+              
+               // Creates an object of class Artist using parameterized constructor
+               // and adds it to array list
+               artist.add(new Artist(record[0], Integer.parseInt(record[1])));
+           }// End of while
+          
+           // Closer the file
+           sc.close();
+       }// End of try block
+          
+       //Catch block to handle file not found exception
+       catch(FileNotFoundException e)
+       {
+           System.out.println("Error: File artist.dat Not found for reading.");
+           e.printStackTrace();
+       }//End of catch          
+   }//End of method
+  
+   // Method to display all artist information
+   static void show(ArrayList<Artist> artist)
+   {
+       // To store total stream
+       double total = 0;
+      
+       // Loops till number of artists
+       for(int c = 0; c < artist.size(); c++)
+       {
+           // Calculates total stream
+           total += artist.get(c).getStrem();
+           // Displays current artist information
+           System.out.print(artist.get(c));
+       }
+      
+       // Calculates and displays average per stream
+       System.out.printf("\n\n Average Stream: %.2f", (total / artist.size()));
+   }
+  
+   // main method definition
+   public static void main(String []s)
+   {
+       // Creates an array of object to store Artist class object
+       ArrayList<Artist> artist = new ArrayList<Artist>();
+       // Calls the method to read file contents
+       readFile(artist);
+       // Method to display information
+       show(artist);
+   }
+}// End of driver class
