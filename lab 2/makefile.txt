@@ -1,0 +1,12 @@
+default:
+	# 1. Process yacc grammar file 
+	yacc -d convert.y
+	
+	# 2. Process the lex specification file
+	lex convert.l
+
+	# 3. Compile and link to program name convert
+	cc y.tab.c lex.yy.c -o convert
+
+	# 4. Run convert program
+	./convert
