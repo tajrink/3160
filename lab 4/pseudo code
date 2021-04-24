@@ -1,4 +1,4 @@
-pseudo code
+
 repeat
     if itemCount <= 1
         return
