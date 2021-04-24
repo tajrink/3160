@@ -1,0 +1,14 @@
+pseudo code
+repeat
+    if itemCount <= 1
+        return
+    hasChanged := false
+    decrement itemCount
+    repeat with index from 1 to itemCount
+        if (item at index) > (item at (index + 1))
+            swap (item at index) with (item at (index + 1))
+            hasChanged := true
+until hasChanged = false
+
+
+
